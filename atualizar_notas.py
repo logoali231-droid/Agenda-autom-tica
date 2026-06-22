@@ -62,6 +62,7 @@ for curso_nome, course_id in COURSES.items():
         assignments = get_all_pages(
             f"{BASE_URL}/courses/{course_id}/assignments?per_page=100"
         )
+        print(f"{curso_nome}: {len(assignments)} atividades encontradas")
 
         linhas = []
         total_obtido = 0.0
@@ -149,6 +150,8 @@ for curso_nome, course_id in COURSES.items():
             "Media (%)": media
         })
 
+        print(f"{curso_nome}: {len(linhas)} linhas geradas")
+
         df = pd.DataFrame(linhas)
 
         if len(df) > 0:
@@ -160,12 +163,15 @@ for curso_nome, course_id in COURSES.items():
 
     except Exception as e:
 
+        print(f"ERRO EM {curso_nome}: {e}")
+
         resumo.append({
             "Disciplina": curso_nome,
             "Obtido": "ERRO",
             "Maximo": "",
             "Media (%)": str(e)
         })
+
 pd.DataFrame(
     nao_contabilizadas
 ).to_excel(
