@@ -68,70 +68,77 @@ for curso_nome, course_id in COURSES.items():
         total_obtido = 0.0
         total_maximo = 0.0
 
-        for a in assignments:
+    for a in assignments:
 
-            if a.get("omit_from_final_grade", False):
-              nao_contabilizadas.append({
-             "Disciplina": curso_nome,
-             "Atividade": a["name"]
-         })
+    # atividades que não entram na nota final
+    if a.get("omit_from_final_grade", False):
 
-             continue
+        nao_contabilizadas.append({
+            "Disciplina": curso_nome,
+            "Atividade": a["name"]
+        })
 
-            pontos = a.get("points_possible")
+        continue
 
-            if pontos is None or pontos <= 0:
-              continue
+    pontos = a.get("points_possible")
 
-            try:
+    # ignora atividades sem pontuação
+    if pontos is None or pontos <= 0:
+        continue
 
-                sub = requests.get(
-                    f"{BASE_URL}/courses/{course_id}/assignments/{a['id']}/submissions/self",
-                    headers=HEADERS
-                ).json()
+    try:
 
-                score = sub.get("score")
+        sub = requests.get(
+            f"{BASE_URL}/courses/{course_id}/assignments/{a['id']}/submissions/self",
+            headers=HEADERS
+        ).json()
 
-            except:
-                score = None
+        score = sub.get("score")
 
-            if score is None:
-              status = "Pendente"
+    except Exception:
+        score = None
 
-                pendentes.append({
-                    "Disciplina": curso_nome,
-                    "Atividade": a["name"],
-                    "Valor Maximo": pontos
-                })
-                if float(score) >= float(pontos) * 0.7:
-                   status = "Bom"
-                else:
-                   status = "Atencao"
-                linhas.append({
-                    "Atividade": a["name"],
-                    "Obtido": "",
-                    "Maximo": pontos,
-                    "%": "",
-                    "Status": status
-                })
+    # atividade ainda sem nota
+    if score is None:
 
-                continue
+        pendentes.append({
+            "Disciplina": curso_nome,
+            "Atividade": a["name"],
+            "Valor Maximo": pontos
+        })
 
-            percentual = round(
-                (float(score) / float(pontos)) * 100,
-                2
-            )
+        linhas.append({
+            "Atividade": a["name"],
+            "Obtido": "",
+            "Maximo": pontos,
+            "%": "",
+            "Status": "Pendente"
+        })
 
-            total_obtido += float(score)
-            total_maximo += float(pontos)
+        continue
 
-            linhas.append({
-                "Atividade": a["name"],
-                "Obtido": score,
-                "Maximo": pontos,
-                "%": percentual,
-                "Status": "Corrigida"
-            })
+    percentual = round(
+        (float(score) / float(pontos)) * 100,
+        2
+    )
+
+    total_obtido += float(score)
+    total_maximo += float(pontos)
+
+    if percentual >= 70:
+        status = "Bom"
+    else:
+        status = "Atencao"
+
+    linhas.append({
+        "Atividade": a["name"],
+        "Obtido": score,
+        "Maximo": pontos,
+        "%": percentual,
+        "Status": status
+    })
+
+
 
         media = 0
 
@@ -164,7 +171,7 @@ for curso_nome, course_id in COURSES.items():
             "Disciplina": curso_nome,
             "Obtido": "ERRO",
             "Maximo": "",
-            "Media (%)": "",
+            "Media (%)": media
             "Media (0-10)": str(e)
         })
 pd.DataFrame(
