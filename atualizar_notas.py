@@ -8,16 +8,14 @@ TOKEN = os.environ["CANVAS_TOKEN"]
 
 BASE_URL = "https://pucpr.instructure.com/api/v1"
 
-HEADERS = {
-    "Authorization": f"Bearer {TOKEN}"
-}
+HEADERS = {"Authorization": f"Bearer {TOKEN}"}
 
 COURSES = {
     "Aspectos Legais": 61646,
     "Experiencia Criativa": 61655,
     "Filosofia": 61640,
     "Raciocinio Algoritmico": 61650,
-    "Fundamentos Sistemas Ciberfisicos": 61660
+    "Fundamentos Sistemas Ciberfisicos": 61660,
 }
 
 
@@ -28,9 +26,7 @@ def get_all_pages(url):
         r = requests.get(url, headers=HEADERS)
 
         if r.status_code != 200:
-            raise Exception(
-                f"Erro {r.status_code}: {r.text}"
-            )
+            raise Exception(f"Erro {r.status_code}: {r.text}")
 
         dados.extend(r.json())
 
@@ -44,21 +40,16 @@ def get_all_pages(url):
 
 arquivo_excel = "Painel_Academico_PUCPR.xlsx"
 
-writer = pd.ExcelWriter(
-    arquivo_excel,
-    engine="openpyxl"
-)
+writer = pd.ExcelWriter(arquivo_excel, engine="openpyxl")
 
 resumo = []
 pendentes = []
 nao_contabilizadas = []
 
 for curso_nome, course_id in COURSES.items():
-
     print(f"Processando {curso_nome}")
 
     try:
-
         assignments = get_all_pages(
             f"{BASE_URL}/courses/{course_id}/assignments?per_page=100"
         )
@@ -70,13 +61,10 @@ for curso_nome, course_id in COURSES.items():
         total_futuro = 0.0
 
         for a in assignments:
-
             if a.get("omit_from_final_grade", False):
-
-                nao_contabilizadas.append({
-                    "Disciplina": curso_nome,
-                    "Atividade": a["name"]
-                })
+                nao_contabilizadas.append(
+                    {"Disciplina": curso_nome, "Atividade": a["name"]}
+                )
 
                 continue
 
@@ -86,10 +74,9 @@ for curso_nome, course_id in COURSES.items():
                 continue
 
             try:
-
                 sub = requests.get(
                     f"{BASE_URL}/courses/{course_id}/assignments/{a['id']}/submissions/self",
-                    headers=HEADERS
+                    headers=HEADERS,
                 ).json()
 
                 score = sub.get("score")
@@ -100,26 +87,27 @@ for curso_nome, course_id in COURSES.items():
             if score is None:
                 total_futuro += float(pontos)
 
-                pendentes.append({
-                    "Disciplina": curso_nome,
-                    "Atividade": a["name"],
-                    "Valor Maximo": pontos
-                })
+                pendentes.append(
+                    {
+                        "Disciplina": curso_nome,
+                        "Atividade": a["name"],
+                        "Valor Maximo": pontos,
+                    }
+                )
 
-                linhas.append({
-                    "Atividade": a["name"],
-                    "Obtido": "",
-                    "Maximo": pontos,
-                    "%": "",
-                    "Status": "Pendente"
-                })
+                linhas.append(
+                    {
+                        "Atividade": a["name"],
+                        "Obtido": "",
+                        "Maximo": pontos,
+                        "%": "",
+                        "Status": "Pendente",
+                    }
+                )
 
                 continue
 
-            percentual = round(
-                (float(score) / float(pontos)) * 100,
-                2
-            )
+            percentual = round((float(score) / float(pontos)) * 100, 2)
 
             total_obtido += float(score)
             total_maximo += float(pontos)
@@ -129,128 +117,94 @@ for curso_nome, course_id in COURSES.items():
             else:
                 status = "Atencao"
 
-            linhas.append({
-                "Atividade": a["name"],
-                "Obtido": score,
-                "Maximo": pontos,
-                "%": percentual,
-                "Status": status
-            })
+            linhas.append(
+                {
+                    "Atividade": a["name"],
+                    "Obtido": score,
+                    "Maximo": pontos,
+                    "%": percentual,
+                    "Status": status,
+                }
+            )
 
         media = 0
 
         if total_maximo > 0:
-            media = round(
-                (total_obtido / total_maximo) * 100,
-                2
+            media = round((total_obtido / total_maximo) * 100, 2)
+            projecao = media
+
+        if total_futuro > 0 and total_maximo > 0:
+            desempenho_atual = total_obtido / total_maximo
+
+            nota_futura_esperada = total_futuro * desempenho_atual
+
+            projecao = round(
+                (total_obtido + nota_futura_esperada)
+                / (total_maximo + total_futuro)
+                * 100,
+                2,
             )
-        projecao = media
 
-       if total_futuro > 0 and total_maximo > 0:
-
-          desempenho_atual = total_obtido / total_maximo
-
-          nota_futura_esperada = (
-          total_futuro * desempenho_atual
-         )
-
-          projecao = round(
-        (
-            total_obtido +
-            nota_futura_esperada
-        )
-        /
-        (
-            total_maximo +
-            total_futuro
-        )
-        * 100,
-        2
-    )
-
-        resumo.append({
-    "Disciplina": curso_nome,
-    "Obtido": round(total_obtido, 2),
-    "Maximo Atual": round(total_maximo, 2),
-    "Pontos Pendentes": round(total_futuro, 2),
-    "Media Atual (%)": media,
-    "Projecao Final (%)": projecao
-})
+            resumo.append(
+                {
+                    "Disciplina": curso_nome,
+                    "Obtido": round(total_obtido, 2),
+                    "Maximo Atual": round(total_maximo, 2),
+                    "Pontos Pendentes": round(total_futuro, 2),
+                    "Media Atual (%)": media,
+                    "Projecao Final (%)": projecao,
+                }
+            )
 
         print(f"{curso_nome}: {len(linhas)} linhas geradas")
 
         df = pd.DataFrame(linhas)
 
         if len(df) > 0:
-            df.to_excel(
-                writer,
-                sheet_name=curso_nome[:31],
-                index=False
-            )
+            df.to_excel(writer, sheet_name=curso_nome[:31], index=False)
 
     except Exception as e:
-
         print(f"ERRO EM {curso_nome}: {e}")
 
-        resumo.append({
-            "Disciplina": curso_nome,
-            "Obtido": "ERRO",
-            "Maximo": "",
-            "Media (%)": str(e)
-        })
+        resumo.append(
+            {
+                "Disciplina": curso_nome,
+                "Obtido": "ERRO",
+                "Maximo Atual": "",
+                "Pontos Pendentes": "",
+                "Media Atual (%)": "",
+                "Projecao Final (%)": str(e),
+            }
+        )
 
-pd.DataFrame(
-    nao_contabilizadas
-).to_excel(
-    writer,
-    sheet_name="Nao_Contabilizadas",
-    index=False
+pd.DataFrame(nao_contabilizadas).to_excel(
+    writer, sheet_name="Nao_Contabilizadas", index=False
 )
 
-pd.DataFrame(resumo).to_excel(
-    writer,
-    sheet_name="Resumo",
-    index=False
-)
+pd.DataFrame(resumo).to_excel(writer, sheet_name="Resumo", index=False)
 
-pd.DataFrame(pendentes).to_excel(
-    writer,
-    sheet_name="Pendentes",
-    index=False
-)
+pd.DataFrame(pendentes).to_excel(writer, sheet_name="Pendentes", index=False)
 
 writer.close()
 
 wb = load_workbook(arquivo_excel)
 
 for ws in wb.worksheets:
-
     for cell in ws[1]:
-
         cell.font = Font(bold=True)
 
-        cell.fill = PatternFill(
-            fill_type="solid",
-            fgColor="D9EAD3"
-        )
+        cell.fill = PatternFill(fill_type="solid", fgColor="D9EAD3")
 
     for col in ws.columns:
-
         tamanho = 0
 
         for cell in col:
-
             try:
-                tamanho = max(
-                    tamanho,
-                    len(str(cell.value))
-                )
-            except:
+                tamanho = max(tamanho, len(str(cell.value)))
+            except:  # noqa: E722
                 pass
 
-        ws.column_dimensions[
-            col[0].column_letter
-        ].width = tamanho + 3
+        ws.column_dimensions[col[0].column_letter].width = tamanho + 3
 
 wb.save(arquivo_excel)
 
