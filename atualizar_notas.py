@@ -64,81 +64,75 @@ for curso_nome, course_id in COURSES.items():
         )
 
         linhas = []
-
         total_obtido = 0.0
         total_maximo = 0.0
 
-    for a in assignments:
+        for a in assignments:
 
-    # atividades que não entram na nota final
-    if a.get("omit_from_final_grade", False):
+            if a.get("omit_from_final_grade", False):
 
-        nao_contabilizadas.append({
-            "Disciplina": curso_nome,
-            "Atividade": a["name"]
-        })
+                nao_contabilizadas.append({
+                    "Disciplina": curso_nome,
+                    "Atividade": a["name"]
+                })
 
-        continue
+                continue
 
-    pontos = a.get("points_possible")
+            pontos = a.get("points_possible")
 
-    # ignora atividades sem pontuação
-    if pontos is None or pontos <= 0:
-        continue
+            if pontos is None or pontos <= 0:
+                continue
 
-    try:
+            try:
 
-        sub = requests.get(
-            f"{BASE_URL}/courses/{course_id}/assignments/{a['id']}/submissions/self",
-            headers=HEADERS
-        ).json()
+                sub = requests.get(
+                    f"{BASE_URL}/courses/{course_id}/assignments/{a['id']}/submissions/self",
+                    headers=HEADERS
+                ).json()
 
-        score = sub.get("score")
+                score = sub.get("score")
 
-    except Exception:
-        score = None
+            except Exception:
+                score = None
 
-    # atividade ainda sem nota
-    if score is None:
+            if score is None:
 
-        pendentes.append({
-            "Disciplina": curso_nome,
-            "Atividade": a["name"],
-            "Valor Maximo": pontos
-        })
+                pendentes.append({
+                    "Disciplina": curso_nome,
+                    "Atividade": a["name"],
+                    "Valor Maximo": pontos
+                })
 
-        linhas.append({
-            "Atividade": a["name"],
-            "Obtido": "",
-            "Maximo": pontos,
-            "%": "",
-            "Status": "Pendente"
-        })
+                linhas.append({
+                    "Atividade": a["name"],
+                    "Obtido": "",
+                    "Maximo": pontos,
+                    "%": "",
+                    "Status": "Pendente"
+                })
 
-        continue
+                continue
 
-    percentual = round(
-        (float(score) / float(pontos)) * 100,
-        2
-    )
+            percentual = round(
+                (float(score) / float(pontos)) * 100,
+                2
+            )
 
-    total_obtido += float(score)
-    total_maximo += float(pontos)
+            total_obtido += float(score)
+            total_maximo += float(pontos)
 
-    if percentual >= 70:
-        status = "Bom"
-    else:
-        status = "Atencao"
+            if percentual >= 70:
+                status = "Bom"
+            else:
+                status = "Atencao"
 
-    linhas.append({
-        "Atividade": a["name"],
-        "Obtido": score,
-        "Maximo": pontos,
-        "%": percentual,
-        "Status": status
-    })
-
-
+            linhas.append({
+                "Atividade": a["name"],
+                "Obtido": score,
+                "Maximo": pontos,
+                "%": percentual,
+                "Status": status
+            })
 
         media = 0
 
@@ -152,8 +146,7 @@ for curso_nome, course_id in COURSES.items():
             "Disciplina": curso_nome,
             "Obtido": round(total_obtido, 2),
             "Maximo": round(total_maximo, 2),
-            "Media (%)": media,
-            "Media (0-10)": round(media / 10, 2)
+            "Media (%)": media
         })
 
         df = pd.DataFrame(linhas)
@@ -171,8 +164,7 @@ for curso_nome, course_id in COURSES.items():
             "Disciplina": curso_nome,
             "Obtido": "ERRO",
             "Maximo": "",
-            "Media (%)": media
-            "Media (0-10)": str(e)
+            "Media (%)": str(e)
         })
 pd.DataFrame(
     nao_contabilizadas
