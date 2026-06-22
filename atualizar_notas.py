@@ -67,6 +67,7 @@ for curso_nome, course_id in COURSES.items():
         linhas = []
         total_obtido = 0.0
         total_maximo = 0.0
+        total_futuro = 0.0
 
         for a in assignments:
 
@@ -97,6 +98,7 @@ for curso_nome, course_id in COURSES.items():
                 score = None
 
             if score is None:
+                total_futuro += float(pontos)
 
                 pendentes.append({
                     "Disciplina": curso_nome,
@@ -142,13 +144,38 @@ for curso_nome, course_id in COURSES.items():
                 (total_obtido / total_maximo) * 100,
                 2
             )
+        projecao = media
+
+       if total_futuro > 0 and total_maximo > 0:
+
+          desempenho_atual = total_obtido / total_maximo
+
+          nota_futura_esperada = (
+          total_futuro * desempenho_atual
+         )
+
+          projecao = round(
+        (
+            total_obtido +
+            nota_futura_esperada
+        )
+        /
+        (
+            total_maximo +
+            total_futuro
+        )
+        * 100,
+        2
+    )
 
         resumo.append({
-            "Disciplina": curso_nome,
-            "Obtido": round(total_obtido, 2),
-            "Maximo": round(total_maximo, 2),
-            "Media (%)": media
-        })
+    "Disciplina": curso_nome,
+    "Obtido": round(total_obtido, 2),
+    "Maximo Atual": round(total_maximo, 2),
+    "Pontos Pendentes": round(total_futuro, 2),
+    "Media Atual (%)": media,
+    "Projecao Final (%)": projecao
+})
 
         print(f"{curso_nome}: {len(linhas)} linhas geradas")
 
