@@ -45,6 +45,7 @@ writer = pd.ExcelWriter(arquivo_excel, engine="openpyxl")
 resumo = []
 pendentes = []
 nao_contabilizadas = []
+agenda = []
 
 for curso_nome, course_id in COURSES.items():
     print(f"Processando {curso_nome}")
@@ -69,6 +70,8 @@ for curso_nome, course_id in COURSES.items():
                 continue
 
             pontos = a.get("points_possible")
+            due_at = a.get("due_at")
+            html_url = a.get("html_url")
 
             if pontos is None or pontos <= 0:
                 continue
@@ -91,18 +94,32 @@ for curso_nome, course_id in COURSES.items():
                     {
                         "Disciplina": curso_nome,
                         "Atividade": a["name"],
+                        "Entrega": due_at, 
                         "Valor Maximo": pontos,
+                        "Link": html_url,                       
                     }
+                )
+              
+                agenda.append(
+                  {
+                     "Data": due_at,
+                     "Disciplina": curso_nome,
+                     "Atividade": a["name"],
+                     "Status": "Pendente",
+                     "Link": html_url,
+                  }
                 )
 
                 linhas.append(
-                    {
-                        "Atividade": a["name"],
-                        "Obtido": "",
-                        "Maximo": pontos,
-                        "%": "",
-                        "Status": "Pendente",
-                    }
+                {
+                   "Atividade": a["name"],
+                   "Entrega": due_at,
+                   "Obtido": "",
+                  "Maximo": pontos,
+                  "%": "",
+                  "Status": "Pendente",
+                 "Link": html_url,
+                }
                 )
 
                 continue
