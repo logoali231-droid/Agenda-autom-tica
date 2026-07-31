@@ -13,6 +13,7 @@ CALENDAR_ID = "logoali231@gmail.com"
 
 
 def get_calendar():
+
     info = json.loads(
         os.environ["GOOGLE_SERVICE_ACCOUNT"]
     )
@@ -29,13 +30,31 @@ def get_calendar():
     )
 
 
-def criar_evento(
+def procurar_evento(service, canvas_id):
+
+    eventos = service.events().list(
+        calendarId=CALENDAR_ID,
+        privateExtendedProperty=f"canvas_id={canvas_id}",
+    ).execute()
+
+    itens = eventos.get("items", [])
+
+    if itens:
+        return itens[0]
+
+    return None
+
+
+def criar_ou_atualizar_evento(
     service,
+    canvas_id,
     titulo,
     descricao,
     inicio,
     link,
 ):
+
+    fim = inicio + timedelta(hours=1)
 
     body = {
 
@@ -49,14 +68,34 @@ def criar_evento(
         },
 
         "end": {
-            "dateTime": (
-                inicio + timedelta(hours=1)
-            ).isoformat(),
+            "dateTime": fim.isoformat(),
             "timeZone": "America/Sao_Paulo",
         },
+
+        "extendedProperties": {
+            "private": {
+                "canvas_id": canvas_id
+            }
+        }
+
     }
 
-    service.events().insert(
-        calendarId=CALENDAR_ID,
-        body=body,
-    ).execute()
+    evento = procurar_evento(
+        service,
+        canvas_id,
+    )
+
+    if evento:
+
+        service.events().update(
+            calendarId=CALENDAR_ID,
+            eventId=evento["id"],
+            body=body,
+        ).execute()
+
+    else:
+
+        service.events().insert(
+            calendarId=CALENDAR_ID,
+            body=body,
+        ).execute()
