@@ -3,6 +3,10 @@ import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill
 import os
+from calendar_sync import (
+    get_calendar,
+    criar_ou_atualizar_evento,
+)
 
 TOKEN = os.environ["CANVAS_TOKEN"]
 
@@ -46,7 +50,7 @@ resumo = []
 pendentes = []
 nao_contabilizadas = []
 agenda = []
-
+calendar = get_calendar()
 for curso_nome, course_id in COURSES.items():
     print(f"Processando {curso_nome}")
 
@@ -72,6 +76,33 @@ for curso_nome, course_id in COURSES.items():
             pontos = a.get("points_possible")
             due_at = a.get("due_at")
             html_url = a.get("html_url")
+            if due_at:
+
+    inicio = datetime.fromisoformat(
+        due_at.replace("Z", "+00:00")
+    )
+
+    if due_at:
+
+    inicio = datetime.fromisoformat(
+        due_at.replace("Z", "+00:00")
+    )
+
+    criar_ou_atualizar_evento(
+
+        calendar,
+
+        f"{course_id}_{a['id']}",
+
+        f"{curso_nome} - {a['name']}",
+
+        f"Vale {pontos} pontos",
+
+        inicio,
+
+        html_url or "",
+
+    )
 
             if pontos is None or pontos <= 0:
                 continue
