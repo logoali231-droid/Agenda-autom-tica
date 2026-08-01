@@ -29,16 +29,17 @@ jobs:
       - name: Executar atualizacao
         env:
           CANVAS_TOKEN: ${{ secrets.CANVAS_TOKEN }}
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
         run: |
           python atualizar_notas.py
 
-      - name: Salvar planilha atualizada
+      - name: Commit das atualizacoes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          git add Painel_Academico_PUCPR.xlsx
+          git add .
 
-          git commit -m "Atualizacao automatica das notas" || echo "Sem alteracoes"
+          git commit -m "Atualizacao automatica" || echo "Sem alteracoes"
 
           git push
