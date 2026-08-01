@@ -7,6 +7,7 @@ from calendar_sync import (
     get_calendar,
     criar_ou_atualizar_evento,
 )
+from datetime import datetime
 
 TOKEN = os.environ["CANVAS_TOKEN"]
 
@@ -76,33 +77,26 @@ for curso_nome, course_id in COURSES.items():
             pontos = a.get("points_possible")
             due_at = a.get("due_at")
             html_url = a.get("html_url")
+            pontos = a.get("points_possible")
+            due_at = a.get("due_at")
+            html_url = a.get("html_url")
+
+            if pontos is None or pontos <= 0:
+                continue
+
             if due_at:
+                inicio = datetime.fromisoformat(
+                    due_at.replace("Z", "+00:00")
+                )
 
-    inicio = datetime.fromisoformat(
-        due_at.replace("Z", "+00:00")
-    )
-
-    if due_at:
-
-    inicio = datetime.fromisoformat(
-        due_at.replace("Z", "+00:00")
-    )
-
-    criar_ou_atualizar_evento(
-
-        calendar,
-
-        f"{course_id}_{a['id']}",
-
-        f"{curso_nome} - {a['name']}",
-
-        f"Vale {pontos} pontos",
-
-        inicio,
-
-        html_url or "",
-
-    )
+                criar_ou_atualizar_evento(
+                    calendar,
+                    f"{course_id}_{a['id']}",
+                    f"{curso_nome} - {a['name']}",
+                    f"Vale {pontos} pontos",
+                    inicio,
+                    html_url or "",
+                )
 
             if pontos is None or pontos <= 0:
                 continue
