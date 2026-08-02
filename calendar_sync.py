@@ -57,35 +57,28 @@ def criar_ou_atualizar_evento(
     fim = inicio + timedelta(hours=1)
 
     body = {
-
         "summary": titulo,
-
         "description": f"{descricao}\n\n{link}",
-
         "start": {
             "dateTime": inicio.isoformat(),
             "timeZone": "America/Sao_Paulo",
         },
-
         "end": {
             "dateTime": fim.isoformat(),
             "timeZone": "America/Sao_Paulo",
         },
-
         "extendedProperties": {
             "private": {
                 "canvas_id": canvas_id
             }
         }
-
     }
 
-    evento = procurar_evento(
-        service,
-        canvas_id,
-    )
+    evento = procurar_evento(service, canvas_id)
 
     if evento:
+
+        print(f"ATUALIZANDO EVENTO: {titulo}")
 
         service.events().update(
             calendarId=CALENDAR_ID,
@@ -95,7 +88,11 @@ def criar_ou_atualizar_evento(
 
     else:
 
+        print(f"CRIANDO EVENTO: {titulo}")
+
         service.events().insert(
             calendarId=CALENDAR_ID,
             body=body,
         ).execute()
+
+    print("OK")
