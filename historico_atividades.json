@@ -1,1 +1,417 @@
-[]
+[
+  {
+    "id": 314988,
+    "nome": "Atividade Aula 03",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 326536,
+    "nome": "Envio TDE",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 326538,
+    "nome": "ATIVIDADE FORMATIVA 1",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 326540,
+    "nome": "1ª AVALIAÇÃO SOMATIVA",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 326542,
+    "nome": "Tarefa da aula 08 (21/05)",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 334705,
+    "nome": "2º AVALIAÇÃO SOMATIVA",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 326537,
+    "nome": "Atividade Extensionista",
+    "curso": "Aspectos Legais"
+  },
+  {
+    "id": 311950,
+    "nome": "TDE 1 - Trabalho Discente Efetivo",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 311360,
+    "nome": "Atividade1 - Esteganografia",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 312832,
+    "nome": "Atividade2 - Autenticação Firebase",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 315560,
+    "nome": "Atividade3 - Controle de Acesso - Permissões Linux",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 322927,
+    "nome": "Prova 1",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 322931,
+    "nome": "Nota RA1 e RA2",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 320795,
+    "nome": "Atividade4 - Análise de Desempenho Criptográfico",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 324029,
+    "nome": "Atividade5 - Explorando o Ambiente Linux ",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 325863,
+    "nome": "Atividade6 - Estudo de Caso - Incidentes Cibernéticos",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 327283,
+    "nome": "Atividade7 - Ethical Hacking",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 331935,
+    "nome": "Atividade8 - Sistemas de Detecção de Intrusão",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 335739,
+    "nome": "Prova 2",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 335740,
+    "nome": "Nota RA2 e RA3",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 335741,
+    "nome": "Nota Final",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 306964,
+    "nome": "TDE - Semana de Integração",
+    "curso": "Experiencia Criativa"
+  },
+  {
+    "id": 335159,
+    "nome": "RECUPERAÇÃO RA1",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 335160,
+    "nome": "RECUPERAÇÃO RA2",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 335161,
+    "nome": "RECUPERAÇÃO RA3",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 306977,
+    "nome": "TDE - 23/02 - 27/02",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 312147,
+    "nome": "Aula 2 - TAREFA FORMATIVA - O valor da  filosofia",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 314755,
+    "nome": "Aula 3 - TAREFA FORMATIVA - KANT: resposta a pergunta o que é o esclarecimento",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 317392,
+    "nome": "Aula 4 - TAREFA FORMATIVA - O equilibrista ",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 318704,
+    "nome": "Aula 4 - TAREFA SOMATIVA - O existencialismo é um humanismo ",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 321644,
+    "nome": "ATIVIDADE AVALIATIVA SOMATIVA - PROVA RA1",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 327975,
+    "nome": "Aula 6 - TAREFA SOMATIVA - A sociedade do cansaço ",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 324717,
+    "nome": "Aula 5 - TAREFA - Arendt e a condição humana",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 315000,
+    "nome": "TDE - parte 1 - TAREFA SOMATIVA - A inteligência artificial vai nos superar? ",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 319723,
+    "nome": "TDE - parte 2 - TAREFA SOMATIVA - Educação: a mudança é a única constante",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 329545,
+    "nome": "TDE - parte final - ENTREGA do LINK",
+    "curso": "Filosofia"
+  },
+  {
+    "id": 311435,
+    "nome": "TDE 1 - Expressões aritméticas, lógicas e relacionais",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 312209,
+    "nome": "TDE 2 - Estruturas de Decisão",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 314144,
+    "nome": "TDE 3 - Estruturas de Repetição",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 315725,
+    "nome": "PjBL 1 - Folha de Pagamento",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 318637,
+    "nome": "Exercício 15/04 - Imagens procedurais",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 319734,
+    "nome": "Exercício 22/04",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 322534,
+    "nome": "Prova 1",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 324413,
+    "nome": "TDE 4 - Vetores / Listas",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 325290,
+    "nome": "PjBL 2 - Batalha Naval",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 326304,
+    "nome": "Exercicio 20/05 - Filtro imagem",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 327747,
+    "nome": "TDE 5 - Matrizes",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 327750,
+    "nome": "TDE 6 - Funções",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 332148,
+    "nome": "Teste 2",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 333606,
+    "nome": "Teste 2 - Correção",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 334621,
+    "nome": "Prova 3 - Recuperação RA2",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 336597,
+    "nome": "Prova 4 - Final (RA1 e RA2)",
+    "curso": "Raciocinio Algoritmico"
+  },
+  {
+    "id": 319603,
+    "nome": "S1.Avaliação Somativa 1",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 326601,
+    "nome": "S2.Avaliação Somativa 2",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 332469,
+    "nome": "S3.Avaliação Somativa 3",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318593,
+    "nome": "Conversão de Bases - Exercícios Adionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318598,
+    "nome": "Limites números binários - Exercícios Adicionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318599,
+    "nome": "Números Negativos - Exercícios Adicionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318600,
+    "nome": "Operações em Outras Bases - Exercícios Adicionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318601,
+    "nome": "Bitwise - Exercícios Adicionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 313565,
+    "nome": "CRE1.Cumulative Reinforcement Exercise 1",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 316281,
+    "nome": "CRE2.Cumulative Reinforcement Exercise 2",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 316282,
+    "nome": "CRE3.Cumulative Reinforcement Exercise 3",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 316283,
+    "nome": "CRE4.Cumulative Reinforcement Exercise 4",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 316284,
+    "nome": "CRE5.Cumulative Reinforcement Exercise 5",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 316285,
+    "nome": "CRE6.Cumulative Reinforcement Exercise 6",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318435,
+    "nome": "CRE7.Cumulative Reinforcement Exercise 7 - Máquinas de Turing",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 318561,
+    "nome": "CRE8.Cumulative Reinforcement Exercise 8",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 325300,
+    "nome": "CRE9.Cumulative Reinforcement Exercise 9",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 325301,
+    "nome": "CRE10.Cumulative Reinforcement Exercise 10",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 325302,
+    "nome": "CRE11.Cumulative Reinforcement Exercise 11",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 328207,
+    "nome": "CRE12.Cumulative Reinforcement Exercise 12 - Sistemas Operacionais",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 328210,
+    "nome": "CRE13.Cumulative Reinforcement Exercise 13 - Comunicação de Dados",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 335398,
+    "nome": "B1.Bônus",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 326657,
+    "nome": "TDE1a.Entregue aqui o link do vídeo de especificação do projeto – ETAPA 1",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 331262,
+    "nome": "TDE1b.Entregue aqui o LINK do vídeo de apresentação do projeto – ETAPA 2",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 331264,
+    "nome": "TDE1c.Entregue aqui o PPT de apresentação do projeto – ETAPA 2",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 334045,
+    "nome": "TDE1d.Apresentação do Projeto",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 329907,
+    "nome": "RA1",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 329908,
+    "nome": "RA1r.Recuperação do RA1",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 329909,
+    "nome": "RA2",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 329910,
+    "nome": "RA3",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 329911,
+    "nome": "MF.Média Final",
+    "curso": "Fundamentos Sistemas Ciberfisicos"
+  }
+]
