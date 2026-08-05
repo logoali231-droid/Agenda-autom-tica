@@ -8,6 +8,7 @@ from calendar_sync import (
     criar_ou_atualizar_evento,
 )
 from datetime import datetime
+import json
 
 TOKEN = os.environ["CANVAS_TOKEN"]
 
@@ -52,6 +53,16 @@ pendentes = []
 nao_contabilizadas = []
 agenda = []
 calendar = get_calendar()
+HISTORICO = "historico_atividades.json"
+
+try:
+    with open(HISTORICO, "r", encoding="utf-8") as f:
+        atividades_antigas = json.load(f)
+except:
+    atividades_antigas = []
+
+ids_antigos = {x["id"] for x in atividades_antigas}
+novas_atividades = []
 for curso_nome, course_id in COURSES.items():
     print(f"Processando {curso_nome}")
 
@@ -67,6 +78,17 @@ for curso_nome, course_id in COURSES.items():
         total_futuro = 0.0
 
         for a in assignments:
+            if a["id"] not in ids_antigos:
+
+    novas_atividades.append(
+        {
+            "id": a["id"],
+            "nome": a["name"],
+            "curso": curso_nome,
+        }
+    )
+
+    print("🆕 NOVA ATIVIDADE:", curso_nome, "-", a["name"])
             if a.get("omit_from_final_grade", False):
                 nao_contabilizadas.append(
                     {"Disciplina": curso_nome, "Atividade": a["name"]}
@@ -254,4 +276,20 @@ print()
 print("=" * 50)
 print("PLANILHA GERADA COM SUCESSO")
 print(arquivo_excel)
+historico = atividades_antigas.copy()
+
+for n in novas_atividades:
+    historico.append(n)
+
+with open(
+    HISTORICO,
+    "w",
+    encoding="utf-8",
+) as f:
+    json.dump(
+        historico,
+        f,
+        ensure_ascii=False,
+        indent=2,
+)
 print("=" * 50)
