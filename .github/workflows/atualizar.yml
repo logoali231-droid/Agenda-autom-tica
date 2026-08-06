@@ -40,7 +40,13 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          git add .
+          rm -rf __pycache__
+          find . -name "*.pyc" -delete
+
+          git add \
+            Painel_Academico_PUCPR.xlsx \
+            historico_atividades.json \
+            courses.json
 
           if git diff --cached --quiet; then
             echo "Sem alteracoes."
