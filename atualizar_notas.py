@@ -103,18 +103,28 @@ def main():
                     continue
 
                 # Cria/atualiza evento no Google Calendar
-                if due_at:
-                    inicio = datetime.fromisoformat(
-                        due_at.replace("Z", "+00:00")
-                    )
-                    criar_ou_atualizar_evento(
-                        calendar,
-                        f"{course_id}_{a['id']}",
-                        f"{curso_nome} - {a['name']}",
-                        f"Vale {pontos} pontos",
-                        inicio,
-                        html_url or "",
-                    )
+                 # --- NOVO BLOCO TRATANDO ATIVIDADES SEM DATA ---
+                 if due_at:
+                     inicio = datetime.fromisoformat(due_at.replace("Z", "+00:00"))
+                     dia_inteiro = False
+                     titulo_evento = f"{curso_nome} - {a['name']}"
+                 else:
+     # Se não tem data, joga para o dia de hoje como dia inteiro
+                     inicio = datetime.now()
+                     dia_inteiro = True
+                     titulo_evento = f"[SEM DATA] {curso_nome} - {a['name']}"
+
+                     criar_ou_atualizar_evento(
+                         
+                          calendar,
+                          f"{course_id}_{a['id']}",
+                          titulo_evento,
+                          f"Vale {pontos} pontos",
+                          inicio,
+                          html_url or "",
+                          o_dia_inteiro=dia_inteiro
+                     )
+
 
                 # Obtém a nota do aluno
                 try:
