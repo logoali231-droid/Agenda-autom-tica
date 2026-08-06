@@ -16,13 +16,10 @@ BASE_URL = "https://pucpr.instructure.com/api/v1"
 
 HEADERS = {"Authorization": f"Bearer {TOKEN}"}
 
-COURSES = {
-    "Aspectos Legais": 61646,
-    "Experiencia Criativa": 61655,
-    "Filosofia": 61640,
-    "Raciocinio Algoritmico": 61650,
-    "Fundamentos Sistemas Ciberfisicos": 61660,
-}
+import json
+
+with open("courses.json", "r", encoding="utf-8") as f:
+    COURSES = json.load(f)
 
 
 def get_all_pages(url):
