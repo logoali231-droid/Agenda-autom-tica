@@ -46,53 +46,55 @@ def procurar_evento(service, canvas_id):
 
 
 def criar_ou_atualizar_evento(
-    service,
-    canvas_id,
-    titulo,
-    descricao,
-    inicio,
-    link,
+ service,
+ canvas_id,
+ titulo,
+ descricao,
+ inicio,
+ link,
+ o_dia_inteiro=False, # Nova flag
 ):
+ if o_dia_inteiro:
+     # O dia de término no Google Calendar deve ser o dia seguinte (inicio + 1 dia)
+     amanha = inicio + timedelta(days=1)
+     config_tempo_inicio = {"date": inicio.strftime("%Y-%m-%d")}
+     config_tempo_fim = {"date": amanha.strftime("%Y-%m-%d")}
+ else:
+     fim = inicio + timedelta(hours=1)
+     config_tempo_inicio = {
+         "dateTime": inicio.isoformat(),
+         "timeZone": "America/Sao_Paulo",
+     }
+     config_tempo_fim = {
+         "dateTime": fim.isoformat(),
+         "timeZone": "America/Sao_Paulo",
+     }
 
-    fim = inicio + timedelta(hours=1)
+ body = {
+ "summary": titulo,
+ "description": f"{descricao}\n\n{link}",
+ "start": config_tempo_inicio,
+ "end": config_tempo_fim,
+ "extendedProperties": {
+ "private": {
+ "canvas_id": canvas_id
+ }
+ }
+ }
 
-    body = {
-        "summary": titulo,
-        "description": f"{descricao}\n\n{link}",
-        "start": {
-            "dateTime": inicio.isoformat(),
-            "timeZone": "America/Sao_Paulo",
-        },
-        "end": {
-            "dateTime": fim.isoformat(),
-            "timeZone": "America/Sao_Paulo",
-        },
-        "extendedProperties": {
-            "private": {
-                "canvas_id": canvas_id
-            }
-        }
-    }
 
-    evento = procurar_evento(service, canvas_id)
-
-    if evento:
-
-        print(f"ATUALIZANDO EVENTO: {titulo}")
-
-        service.events().update(
-            calendarId=CALENDAR_ID,
-            eventId=evento["id"],
-            body=body,
-        ).execute()
-
-    else:
-
-        print(f"CRIANDO EVENTO: {titulo}")
-
-        service.events().insert(
-            calendarId=CALENDAR_ID,
-            body=body,
-        ).execute()
-
-    print("OK")
+ evento = procurar_evento(service, canvas_id)
+ if evento:
+ print(f"ATUALIZANDO EVENTO: {titulo}")
+ service.events().update(
+ calendarId=CALENDAR_ID,
+ eventId=evento["id"],
+ body=body,
+ ).execute()
+ else:
+ print(f"CRIANDO EVENTO: {titulo}")
+ service.events().insert(
+ calendarId=CALENDAR_ID,
+ body=body,
+ ).execute()
+ print("OK")
