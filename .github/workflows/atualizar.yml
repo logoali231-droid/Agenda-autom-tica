@@ -35,19 +35,36 @@ jobs:
         run: |
           python atualizar_notas.py
 
-      - name: Commit das atualizacoes
+      - name: Salvar atualizacoes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
+          # Guarda os arquivos gerados pelo Python
+          cp Painel_Academico_PUCPR.xlsx /tmp/Painel_Academico_PUCPR.xlsx
+          cp historico_atividades.json /tmp/historico_atividades.json 2>/dev/null || true
+
+          # Busca a versão mais recente do repositório
+          git fetch origin main
+
+          # Volta para o estado mais recente do GitHub
+          git reset --hard origin/main
+
+          # Recoloca os arquivos gerados nesta execução
+          cp /tmp/Painel_Academico_PUCPR.xlsx Painel_Academico_PUCPR.xlsx
+
+          if [ -f /tmp/historico_atividades.json ]; then
+            cp /tmp/historico_atividades.json historico_atividades.json
+          fi
+
+          # Remove arquivos Python compilados
           rm -rf __pycache__
-          find . -name "*.pyc" -delete
 
-          git add \
-            Painel_Academico_PUCPR.xlsx \
-            historico_atividades.json \
-            courses.json
+          # Adiciona somente os arquivos que realmente queremos versionar
+          git add Painel_Academico_PUCPR.xlsx
+          git add historico_atividades.json 2>/dev/null || true
 
+          # Verifica se houve alteração
           if git diff --cached --quiet; then
             echo "Sem alteracoes."
             exit 0
@@ -55,6 +72,4 @@ jobs:
 
           git commit -m "Atualizacao automatica"
 
-          git pull --rebase origin main
-
-          git push
+          git push origin main
