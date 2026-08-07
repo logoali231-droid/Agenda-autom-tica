@@ -413,5 +413,90 @@
     "id": 329911,
     "nome": "MF.Média Final",
     "curso": "Fundamentos Sistemas Ciberfisicos"
+  },
+  {
+    "id": 347142,
+    "nome": "TDE – Integração",
+    "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 342275,
+    "nome": "TDE - Semana de Integração Acadêmica",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
+  },
+  {
+    "id": 342276,
+    "nome": "TDE 1 - Trabalho Discente Efetivo",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
+  },
+  {
+    "id": 350693,
+    "nome": "Atividade1 -  Wireshark",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
+  },
+  {
+    "id": 338790,
+    "nome": "SOMATIVA 1A: Modo de Blocos do Algoritmo AES (RA1)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338791,
+    "nome": "SOMATIVA 1B: Negociação ECDH (RA1)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338792,
+    "nome": "SOMATIVA 1C: Modelo criptográfico híbrido do PGP (RA1)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338793,
+    "nome": "SOMATIVA 2A: Autenticação com SALT (RA2)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338794,
+    "nome": "SOMATIVA 2B: Autenticação Mútua e Challenge -SCRAM (RA 2)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338796,
+    "nome": "SOMATIVA 4: Aplicações com API TLS (RA2)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338797,
+    "nome": "TDE 1: Identificação por assinatura digital (RA3)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338798,
+    "nome": "TDE 2: Análise de uma captura HTTPS (RA3)",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338795,
+    "nome": "SOMATIVA 3: Criação e uso de Certificados Digitais (RA 3) ",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338788,
+    "nome": "COMPROVANTE DA SEMANA ACADEMICA",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338802,
+    "nome": "TDE 3: Exercícios de Revisão do RA1",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338799,
+    "nome": "TDE 4: Exercícios de Revisão do RA2",
+    "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 338804,
+    "nome": "TDE 5: Exercícios de Revisão do RA3",
+    "curso": "Criptografia Aplicada"
   }
 ]
