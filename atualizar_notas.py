@@ -1,6 +1,9 @@
 import json
 import os
+import re
 from datetime import datetime
+from html import unescape
+from re import sub
 
 import pandas as pd
 import requests
@@ -11,6 +14,41 @@ from calendar_sync import (
     get_calendar,
     criar_ou_atualizar_evento,
 )
+
+
+def limpar_html(texto):
+    if not texto:
+        return ""
+
+    texto = unescape(texto)
+
+    texto = sub(
+        r"<br\s*/?>",
+        "\n",
+        texto,
+        flags=re.IGNORECASE,
+    )
+
+    texto = sub(
+        r"</p\s*>",
+        "\n\n",
+        texto,
+        flags=re.IGNORECASE,
+    )
+
+    texto = sub(
+        r"<[^>]+>",
+        "",
+        texto,
+    )
+
+    texto = sub(
+        r"\n\s*\n\s*\n+",
+        "\n\n",
+        texto,
+    )
+
+    return texto.strip()
 
 
 TOKEN = os.environ["CANVAS_TOKEN"]
@@ -24,7 +62,6 @@ HEADERS = {
 COURSES_FILE = "courses.json"
 HISTORICO = "historico_atividades.json"
 ARQUIVO_EXCEL = "Painel_Academico_PUCPR.xlsx"
-
 
 def carregar_cursos():
     with open(COURSES_FILE, "r", encoding="utf-8") as f:
@@ -88,6 +125,9 @@ def sincronizar_evento(
 
     pontos = assignment.get("points_possible")
     html_url = assignment.get("html_url")
+    descricao_canvas = limpar_html(
+    assignment.get("description") or ""
+)
 
     try:
         inicio = datetime.fromisoformat(
@@ -109,12 +149,14 @@ def sincronizar_evento(
         status_texto = "Pendente"
 
     descricao = (
-        f"Disciplina: {curso_nome}\n\n"
-        f"Vale: {pontos} pontos\n"
-        f"Status: {status_texto}\n\n"
-        f"Link Canvas:\n"
-        f"{html_url or 'Sem link'}"
-    )
+    f"Disciplina: {curso_nome}\n\n"
+    f"Vale: {pontos} pontos\n"
+    f"Status: {status_texto}\n\n"
+    f"Descrição da atividade:\n"
+    f"{descricao_canvas}\n\n"
+    f"Link Canvas:\n"
+    f"{html_url or 'Sem link'}"
+)
 
     print(
         "ATUALIZANDO EVENTO:",
