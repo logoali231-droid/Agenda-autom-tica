@@ -498,5 +498,15 @@
     "id": 338804,
     "nome": "TDE 5: Exercícios de Revisão do RA3",
     "curso": "Criptografia Aplicada"
+  },
+  {
+    "id": 351240,
+    "nome": "TDE_1",
+    "curso": "Programação Web"
+  },
+  {
+    "id": 351188,
+    "nome": "Primeira entrega - TDE",
+    "curso": "Normas e Padrões de Segurança"
   }
 ]
