@@ -508,5 +508,10 @@
     "id": 351188,
     "nome": "Primeira entrega - TDE",
     "curso": "Normas e Padrões de Segurança"
+  },
+  {
+    "id": 352471,
+    "nome": "Atividade2 - Configuração de Rede (Packet Tracer)",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
   }
 ]
