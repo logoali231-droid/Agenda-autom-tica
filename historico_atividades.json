@@ -513,5 +513,20 @@
     "id": 352471,
     "nome": "Atividade2 - Configuração de Rede (Packet Tracer)",
     "curso": "Conectividade e Sistemas Ciberfísicos"
+  },
+  {
+    "id": 351273,
+    "nome": "TDE 1",
+    "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 352623,
+    "nome": "TDE 2",
+    "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 352624,
+    "nome": "TDE 3",
+    "curso": "Arquitetura de Banco de Dados"
   }
 ]
