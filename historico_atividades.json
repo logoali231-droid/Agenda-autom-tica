@@ -528,5 +528,10 @@
     "id": 352624,
     "nome": "TDE 3",
     "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 353557,
+    "nome": "TS_1 - HTML",
+    "curso": "Programação Web"
   }
 ]
