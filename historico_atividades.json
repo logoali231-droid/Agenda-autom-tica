@@ -538,5 +538,15 @@
     "id": 353558,
     "nome": "TS_2 - Links",
     "curso": "Programação Web"
+  },
+  {
+    "id": 353921,
+    "nome": "PjBL Parte 1",
+    "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 353858,
+    "nome": "Atividade Prática 3 / Relatório Packet Tracer 2",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
   }
 ]
