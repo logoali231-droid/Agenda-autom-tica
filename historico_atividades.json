@@ -553,5 +553,10 @@
     "id": 354101,
     "nome": "Entrega 2 - TDE - aula 03 (21/08) - prazo de entrega até 27/08",
     "curso": "Normas e Padrões de Segurança"
+  },
+  {
+    "id": 355009,
+    "nome": "TS_3 - CSS",
+    "curso": "Programação Web"
   }
 ]
