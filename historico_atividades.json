@@ -563,5 +563,10 @@
     "id": 355872,
     "nome": "PjBL - codigo sql",
     "curso": "Arquitetura de Banco de Dados"
+  },
+  {
+    "id": 356766,
+    "nome": "Atividade Prática4 - Configuração de Rede - Topologia da Rede (Packet Tracer)",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
   }
 ]
