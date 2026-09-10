@@ -573,5 +573,10 @@
     "id": 356449,
     "nome": "TS_4 - JS (Calculadora)",
     "curso": "Programação Web"
+  },
+  {
+    "id": 357886,
+    "nome": "Atividade Prática 5 - Relatório Socket API",
+    "curso": "Conectividade e Sistemas Ciberfísicos"
   }
 ]
