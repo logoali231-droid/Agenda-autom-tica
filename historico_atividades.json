@@ -583,5 +583,10 @@
     "id": 358103,
     "nome": "Entrega aula 6 (11/09) - entrega até 18/09",
     "curso": "Normas e Padrões de Segurança"
+  },
+  {
+    "id": 358841,
+    "nome": "Avaliação Teórica do RA1",
+    "curso": "Criptografia Aplicada"
   }
 ]
